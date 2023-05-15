@@ -61,9 +61,6 @@ class _CartWidgetState extends State<CartWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 220.0, 0.0),
                   child: TextField(
                     controller: _searchController,
-                    onTap: () {
-                      SystemChannels.textInput.invokeMethod('TextInput.hide');
-                    },
                     onSubmitted: (value) {
                       setState(() {});
                     },
@@ -183,6 +180,7 @@ class _CartWidgetState extends State<CartWidget> {
                 !productRecordList.contains(snapshot.data!.first)) {
               productRecordList.add(snapshot.data!.first);
             }
+
             // Return an empty Container when the item does not exist.
 
             List<double> prices =
@@ -191,6 +189,7 @@ class _CartWidgetState extends State<CartWidget> {
             //_searchController.clear();
 
             _model.calculateTotal(prices);
+            _buildTotal();
 
             return productRecordList.isEmpty
                 ? Center(
@@ -207,7 +206,7 @@ class _CartWidgetState extends State<CartWidget> {
                         onDelete: (newList) {
                           //productRecordList.removeAt(position + 1);
                           _buildTotal();
-                          //setState(() {});
+                          setState(() {});
                           productRecordList = newList;
                           prices = productRecordList
                               .map((e) => (e.price ?? 0.0))

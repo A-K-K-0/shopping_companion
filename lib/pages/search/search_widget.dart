@@ -160,6 +160,7 @@ class _SearchWidgetState extends State<SearchWidget>
                                 _model.textController = textEditingController;
                                 return TextFormField(
                                   key: _model.textFieldKey,
+                                  keyboardType: TextInputType.text,
                                   controller: textEditingController,
                                   focusNode: focusNode,
                                   onEditingComplete: onEditingComplete,
